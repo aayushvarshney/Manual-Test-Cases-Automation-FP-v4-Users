@@ -40,91 +40,94 @@ public class SampleProject {
         // Creating NavigateTo class for Navigations in FP V4
         NavigateTo.User(driver).click();
 
-        //Added Wait for UI to fully load
-        Thread.sleep(5000);
+        //Added Implicit Wait for ClickIntercept Decision Limit
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 
         // Test Case #1
+            
+            // Explicit wait for User Module to Load fully
+            Thread.sleep(5000);
+        
+            // Getting the title of the browser tab
+            String titleBarName=driver.getTitle();
 
-        // Getting the title of the browser tab
-        String titleBarName=driver.getTitle();
-
-        // Verifying the title of the browser tab
-        if(titleBarName.equals("Users || OMS || Fresh Prints"))
-            System.out.println("Test Case 1 : Passed ✅");
-        else
-            System.out.println("Test Case 1 : Failed ❌");
+            // Verifying the title of the browser tab
+            if(titleBarName.equals("Users || OMS || Fresh Prints"))
+                System.out.println("Test Case 1 : Passed ✅");
+            else
+                System.out.println("Test Case 1 : Failed ❌");
 
 
         // Test Case #2
 
-        // Creating a List Data Structure to hold all elements of particular class
-        List<WebElement> elements = driver.findElements(By.className("tabs__tab"));
+            // Creating a List Data Structure to hold all elements of particular class
+            List<WebElement> elements = driver.findElements(By.className("tabs__tab"));
 
-        // Getting size of the list DS
-        int elementsCount = elements.size();
+            // Getting size of the list DS
+            int elementsCount = elements.size();
 
-        //Checking all 8 pills appearance
-        if(elementsCount == 8)
-            System.out.println("Test Case 2 : Passed ✅");
-        else
-            System.out.println("Test Case 2 : Failed ❌");
+            //Checking all 8 pills appearance
+            if(elementsCount == 8)
+                System.out.println("Test Case 2 : Passed ✅");
+            else
+                System.out.println("Test Case 2 : Failed ❌");
 
 
         // Test Case #3
 
-        // Creating a List Data Structure to hold all elements of a particular class
-        List<WebElement> countPills = driver.findElements(By.className("tabs__count"));
+            // Creating a List Data Structure to hold all elements of a particular class
+            List<WebElement> countPills = driver.findElements(By.className("tabs__count"));
 
-        // Getting size of the list DS
-        int numbersCount = countPills.size();
+            // Getting size of the list DS
+            int numbersCount = countPills.size();
 
-        // Checking 7 counts appearing on Pills
-        if(numbersCount == 7)
-            System.out.println("Test Case 3 : Passed ✅");
-        else
-            System.out.println("Test Case 3 : Failed ❌");
+            // Checking 7 counts appearing on Pills
+            if(numbersCount == 7)
+                System.out.println("Test Case 3 : Passed ✅");
+            else
+                System.out.println("Test Case 3 : Failed ❌");
 
 
         // Test Case #4
 
-        // Getting the UserName text on NavBar
-        String userName=driver.findElement(By.xpath("//span[@id='userdropdown-info']")).getAttribute("innerHTML");
+            // Getting the UserName text on NavBar
+            String userName=driver.findElement(By.xpath("//span[@id='userdropdown-info']")).getAttribute("innerHTML");
 
-        // Verifying if it matches with what expected
-        if("Fp Interns".equals(userName))
-            System.out.println("Test Case 4 : Passed ✅");
-        else
-            System.out.println("Test Case 4 : Failed ❌");
+            // Verifying if it matches with what expected
+            if("Fp Interns".equals(userName))
+                System.out.println("Test Case 4 : Passed ✅");
+            else
+                System.out.println("Test Case 4 : Failed ❌");
 
 
         // Test Case #5
 
-        // Navigating to Client Pill by NavigateTo Class
-        NavigateTo.ClientPill(driver).click();
+            // Navigating to Client Pill by NavigateTo Class
+            NavigateTo.ClientPill(driver).click();
 
-        // Added Wait for Changes to take place
-        Thread.sleep(5000);
+            // Added Wait for Changes to take place
+            Thread.sleep(5000);
 
-        // Getting the text for Active Pill
-        String pillActive=driver.findElement(By.xpath("//*[@id=\"tabs-wrapper\"]/div[2]/div")).getText();
+            // Getting the text for Active Pill
+            String pillActive=driver.findElement(By.xpath("//*[@id=\"tabs-wrapper\"]/div[2]/div")).getText();
 
-        //Verifying if Client pill got active
-        if(pillActive.contains("Client"))
-            System.out.println("Test Case 5 : Passed ✅");
-        else
-            System.out.println("Test Case 5 : Failed ❌");
+            //Verifying if Client pill got active
+            if(pillActive.contains("Client"))
+                System.out.println("Test Case 5 : Passed ✅");
+            else
+                System.out.println("Test Case 5 : Failed ❌");
 
 
         // Test Case #6
 
-        // Navigating to Create User Button (+)
-        driver.findElement(By.xpath("//*[@id=\"sticky-search-filter\"]/div[2]/app-button/button/img")).click();
+            // Navigating to Create User Button (+)
+            driver.findElement(By.xpath("//*[@id=\"sticky-search-filter\"]/div[2]/app-button/button/img")).click();
 
-        // Selecting Admin for New User Creation
-        driver.findElement(By.xpath("/html/body/app-custom-overlay/div/div/div[2]/app-wizard-create-select/div/div[1]")).click();
+            // Selecting Admin for New User Creation
+            driver.findElement(By.xpath("/html/body/app-custom-overlay/div/div/div[2]/app-wizard-create-select/div/div[1]")).click();
 
-        // Filling Required Details for the Form Corner Case Checks
-        driver.findElement(By.xpath("/html/body/app-custom-overlay/div/div/div[2]/div[1]/app-admin/div/div/aw-wizard/div/aw-wizard-step[1]/div/div[3]/app-contact-info/div/div[1]/div[2]/app-input/div/input")).sendKeys("Aayush");
+            // Filling Required Details for the Form Corner Case Checks
+            driver.findElement(By.xpath("//input[@placeholder=\"e.g. Abram Pattrick\"]")).sendKeys("Aayush");
             driver.findElement(By.xpath("//input[@placeholder=\"e.g. +1(917)720-7465\"]")).sendKeys("9999999999");
             driver.findElement(By.xpath("//input[@placeholder=\"e.g. abram@gmail.com\"]")).sendKeys("aayush@qa.com");
 
@@ -268,7 +271,14 @@ public class SampleProject {
             }
 
 
-        // quitting driver and closing connection
-//        driver.quit();
+        // Wait for Toast Warning to Disappear
+        Thread.sleep(5000);
+
+        // Exiting New User Pop-Up and Navigating back to Users' Module
+        driver.findElement(By.xpath("/html/body/app-custom-overlay/div/div/div[1]/i")).click();
+        driver.findElement(By.xpath("/html/body/ngb-modal-window/div/div/div[3]/button[2]")).click();
+
+        // Quitting driver and Closing connection
+        driver.quit();
     }
 }
